@@ -6,19 +6,18 @@ import java.util.List;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import config.Cont;
 import config.MyBeanConfig;
 import dao.UserDao;
 import domain.User;
 
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl2 implements UserDao {
 
 	public static List<User> users = new ArrayList<User>();
 
 	public void save(String firstname, String lastname, String username, String password) {
 
-		
-		User user = (User) Cont.container.getBean("user");
+		BeanFactory container = new AnnotationConfigApplicationContext(MyBeanConfig.class);
+		User user = (User) container.getBean("user");
 		
 		user.setFirstname(firstname);
 		user.setLastname(lastname);
